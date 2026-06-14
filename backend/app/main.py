@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backend.app.api.satellites import router as satellite_router
+from app.api.satellites import router as satellite_router
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(

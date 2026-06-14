@@ -1,13 +1,13 @@
 import httpx
 
-from backend.app.config import (
+from app.config import (
     CELESTRAK_BASE_URL,
     DEFAULT_GROUP,
     DEFAULT_FORMAT,
 )
 
-from backend.app.parser import TLEParser
-from backend.app.models import SatelliteTLE
+from app.parser import TLEParser
+from app.models import SatelliteTLE
 
 
 class SatelliteService:

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from dataclasses import asdict
-from backend.app.services.satellite_service import SatelliteService
+from app.services.satellite_service import SatelliteService
 
 router = APIRouter(
     prefix="/satellites",

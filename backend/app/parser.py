@@ -1,4 +1,4 @@
-from backend.app.models import SatelliteTLE
+from app.models import SatelliteTLE
 
 
 class TLEParser:
