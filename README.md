@@ -1,1 +1,5 @@
 Live Satellite Tracker
+
+
+python -m uvicorn app.main:app --reload
+npm run dev

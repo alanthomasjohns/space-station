@@ -1,0 +1,10 @@
+services:
+  redis:
+    image: redis:8
+    container_name: space-station-redis
+    ports:
+      - "6379:6379"
+
+networks:
+  default:
+    name: space-station-network
