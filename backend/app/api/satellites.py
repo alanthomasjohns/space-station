@@ -17,4 +17,4 @@ async def get_satellite_tle():
     """
 
     satellites = await service.get_satellites()
-    return [asdict(satellite) for satellite in satellites]
+    return [satellite for satellite in satellites]
