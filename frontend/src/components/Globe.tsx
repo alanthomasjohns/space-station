@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Viewer, Cartesian2 , Cartesian3, Color } from "cesium";
+import { getSatellites } from "../api/satellites";
 
 
 function Globe() {
@@ -36,6 +37,32 @@ function Globe() {
             },
         });
     }
+
+    function addSatellite(viewer: Viewer, name: string, latitude: number,longitude: number, altitudeKm: number,)
+    {
+        viewer.entities.add(
+            {
+                position: Cartesian3.fromDegrees(
+                longitude,
+                latitude,
+                altitudeKm * 1000
+                ),
+                point: {
+                    pixelSize: 5,
+                    color: Color.RED
+                },
+                label: {
+                    text: name,
+                    pixelOffset: new Cartesian2(0, -10),
+                    fillColor: Color.WHITE,
+                    outlineColor: Color.BLACK,
+                    outlineWidth: 2,
+                    showBackground: true,
+                    backgroundColor: Color.BLACK.withAlpha(0.25),
+                },
+            }
+        );
+    }
     useEffect(() => {
         const viewer = new Viewer("cesium-container", {
             animation: false,
@@ -47,13 +74,23 @@ function Globe() {
             sceneModePicker: false,
             fullscreenButton: false,
         });
-        navigator.geolocation.getCurrentPosition((position) => {
+        navigator.geolocation.getCurrentPosition(async(position) => {
 
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
 
             flyToLocation(viewer, latitude, longitude,);
             addUserMarker(viewer, latitude, longitude,);
+            const satellites = await getSatellites();
+            for (const satellite of satellites) {
+                addSatellite(
+                    viewer,
+                    satellite.name,
+                    satellite.latitude,
+                    satellite.longitude,
+                    satellite.altitude_km,
+                );
+            }
         });
     }, []);
     return (<div id="cesium-container" style={{ width: "100%", height: "600px" }} />);
